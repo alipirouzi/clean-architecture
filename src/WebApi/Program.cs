@@ -12,7 +12,8 @@ builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration)
         .Enrich.FromLogContext();
 });
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddApplicationPart(Presentation.AssemblyInfo.Assembly);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
