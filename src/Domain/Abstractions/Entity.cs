@@ -1,11 +1,8 @@
-using System.Data.Common;
-
-namespace SharedKernel;
+namespace Domain.Abstractions;
 
 public abstract class Entity : IEquatable<Entity>
 {
-    private readonly List<IDomainEvent> _domainEvents = [];
-    public Guid Id { get; private init; }
+    public Guid Id { get; }
 
     public bool Equals(Entity? other)
     {
@@ -39,24 +36,12 @@ public abstract class Entity : IEquatable<Entity>
         return Id.GetHashCode() * 13;
     }
 
-    protected Entity(Guid id)
-    {
-        Id = id;
-    }
-
     private Entity()
     {
     }
 
-    public List<IDomainEvent> DomainEvents => _domainEvents.ToList();
-
-    protected void RaiseEvent(IDomainEvent domainEvent)
+    protected Entity(Guid id)
     {
-        _domainEvents.Add(domainEvent);
-    }
-
-    public void ClearDomainEvents()
-    {
-        _domainEvents.Clear();
+        Id = id;
     }
 }
