@@ -5,5 +5,8 @@ namespace Architecture;
 public class HealthCheck
 {
     [Fact]
-    public void AlwaysPass() => true.Should().BeTrue();
+    public void AlwaysPass()
+    {
+        true.Should().BeTrue();
+    }
 }

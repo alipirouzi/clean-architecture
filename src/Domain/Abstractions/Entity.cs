@@ -2,6 +2,15 @@ namespace Domain.Abstractions;
 
 public abstract class Entity : IEquatable<Entity>
 {
+    private Entity()
+    {
+    }
+
+    protected Entity(Guid id)
+    {
+        Id = id;
+    }
+
     public Guid Id { get; }
 
     public bool Equals(Entity? other)
@@ -13,12 +22,17 @@ public abstract class Entity : IEquatable<Entity>
         return other.Id == Id;
     }
 
-    public static bool operator ==(Entity? left, Entity? right) =>
-        left is not null
-        && right is not null
-        && left.Equals(right);
+    public static bool operator ==(Entity? left, Entity? right)
+    {
+        return left is not null
+               && right is not null
+               && left.Equals(right);
+    }
 
-    public static bool operator !=(Entity? left, Entity? right) => !(left == right);
+    public static bool operator !=(Entity? left, Entity? right)
+    {
+        return !(left == right);
+    }
 
     public override bool Equals(object? obj)
     {
@@ -34,14 +48,5 @@ public abstract class Entity : IEquatable<Entity>
     public override int GetHashCode()
     {
         return Id.GetHashCode() * 13;
-    }
-
-    private Entity()
-    {
-    }
-
-    protected Entity(Guid id)
-    {
-        Id = id;
     }
 }

@@ -16,6 +16,8 @@ public sealed class PostgresOptions
 
 internal class PostgresOptionsSetup(IConfiguration configuration) : IConfigureOptions<PostgresOptions>
 {
-    public void Configure(PostgresOptions options) =>
+    public void Configure(PostgresOptions options)
+    {
         configuration.GetSection(PostgresOptions.ConfigSection).Bind(options);
+    }
 }

@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: super_secret_P@55W0r6
+      POSTGRES_DB: clean_architecture
+    volumes:
+      - /Users/ali/docker/pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped

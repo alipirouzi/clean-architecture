@@ -4,7 +4,7 @@ using Domain.Entities;
 using Microsoft.Extensions.Logging;
 using SharedKernel;
 
-namespace Application.Orders.Commands;
+namespace Application.Orders.Commands.CreateOrder;
 
 public sealed class CreateOrderCommandHandler(
     ILogger<CreateOrderCommandHandler> logger,
@@ -18,6 +18,7 @@ public sealed class CreateOrderCommandHandler(
         var newOrder = Order.Create(newId, request.Name, request.Number, dateTimeProvider.UtcNow);
         await orderRepository.AddSingleOrderAsync(newOrder, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);
+        logger.LogInformation("Order added.");
         return Result.Success();
     }
 }

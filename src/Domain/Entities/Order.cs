@@ -4,7 +4,7 @@ namespace Domain.Entities;
 
 public class Order : AggregateRoot
 {
-    private Order(Guid id, int orderNumber, string name, DateTime createdAtUtc) 
+    private Order(Guid id, int orderNumber, string name, DateTime createdAtUtc)
         : base(id)
     {
         OrderNumber = orderNumber;

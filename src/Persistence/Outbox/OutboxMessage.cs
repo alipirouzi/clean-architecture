@@ -8,7 +8,11 @@ public sealed class OutboxMessage
     public required string Content { get; init; } = string.Empty;
     public string Error { get; private set; } = string.Empty;
     public DateTime? ProcessedAtUtc { get; private set; }
-    public void MarkAsProcessed(DateTime dateTime) => ProcessedAtUtc = dateTime;
+
+    public void MarkAsProcessed(DateTime dateTime)
+    {
+        ProcessedAtUtc = dateTime;
+    }
 
     public void MarkAsError(DateTime dateTime, string error)
     {

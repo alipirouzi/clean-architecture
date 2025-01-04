@@ -1,3 +1,3 @@
 namespace SharedKernel;
 
-public sealed record  Money(double Amount, string Currency);
+public sealed record Money(double Amount, string Currency);

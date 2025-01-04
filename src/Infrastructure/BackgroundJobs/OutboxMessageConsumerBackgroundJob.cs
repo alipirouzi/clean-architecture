@@ -2,7 +2,6 @@ using Domain.Abstractions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Persistence;
 using Persistence.Outbox;
@@ -20,8 +19,10 @@ public class OutboxMessageConsumerBackgroundJob(
 {
     private const int NumberOfAttempts = 5;
 
-    private static readonly JsonSerializerSettings JsonSerializerSettings =
-        new() { TypeNameHandling = TypeNameHandling.All };
+    private static readonly JsonSerializerSettings JsonSerializerSettings = new()
+    {
+        TypeNameHandling = TypeNameHandling.All
+    };
 
     public async Task Execute(IJobExecutionContext context)
     {
@@ -57,20 +58,6 @@ public class OutboxMessageConsumerBackgroundJob(
             }
         }
 
-        await dbContext.SaveChangesAsync();
-    }
-}
-
-internal sealed class OutboxMessageConsumerBackgroundJobSetup : IConfigureOptions<QuartzOptions>
-{
-    public void Configure(QuartzOptions options)
-    {
-        var jobKey = JobKey.Create(nameof(OutboxMessageConsumerBackgroundJob));
-        options.AddJob<OutboxMessageConsumerBackgroundJob>(jobBuilder => jobBuilder
-                .WithIdentity(jobKey))
-            .AddTrigger(trigger => trigger.ForJob(jobKey)
-                .WithSimpleSchedule(schedule => schedule
-                    .WithIntervalInSeconds(1)
-                    .RepeatForever()));
+        await dbContext.SaveChangesAsync(context.CancellationToken);
     }
 }

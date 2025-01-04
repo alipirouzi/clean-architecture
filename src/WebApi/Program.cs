@@ -3,6 +3,7 @@ using Infrastructure;
 using Persistence;
 using Presentation;
 using Serilog;
+using AssemblyInfo = Presentation.AssemblyInfo;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
@@ -14,7 +15,7 @@ builder.Host.UseSerilog((context, configuration) =>
         .Enrich.FromLogContext();
 });
 builder.Services.AddControllers()
-    .AddApplicationPart(Presentation.AssemblyInfo.Assembly);
+    .AddApplicationPart(AssemblyInfo.Assembly);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -35,6 +36,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseSerilogRequestLogging();
 
 app.MapControllers();

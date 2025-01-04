@@ -1,3 +1,4 @@
+using Domain;
 using FluentAssertions;
 using NetArchTest.Rules;
 
@@ -17,7 +18,7 @@ public class StructureTests
     [Fact]
     public void Domain_Should_Not_HaveDependencyOnOtherProjects()
     {
-        var assembly = typeof(Domain.AssemblyInfo).Assembly;
+        var assembly = typeof(AssemblyInfo).Assembly;
         var otherProjects = new[]
         {
             ApplicationNameSpace,
@@ -35,7 +36,7 @@ public class StructureTests
 
         testResult.IsSuccessful.Should().BeTrue();
     }
-    
+
     [Fact]
     public void Application_Should_Not_HaveDependencyOnOtherProjects()
     {
@@ -56,5 +57,4 @@ public class StructureTests
 
         testResult.IsSuccessful.Should().BeTrue();
     }
-    
 }

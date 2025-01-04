@@ -15,7 +15,7 @@ public class ApplicationDbContextFactory :
             .AddUserSecrets(AssemblyInfo.Assembly)
             .Build();
 
-        var postgresOptions = new PostgresOptions()
+        var postgresOptions = new PostgresOptions
         {
             ConnectionString = configuration["PostgresOptions:ConnectionString"]!,
             RetryCount = configuration.GetValue<int>("PostgresOptions:RetryCount"),

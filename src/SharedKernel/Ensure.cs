@@ -7,7 +7,8 @@ public class Ensure
 {
     public static void NotNullOrEmpty(
         [NotNull] string? value,
-        [CallerArgumentExpression(nameof(value))] string? paramName = default
+        [CallerArgumentExpression(nameof(value))]
+        string? paramName = default
     )
     {
         if (string.IsNullOrEmpty(value))

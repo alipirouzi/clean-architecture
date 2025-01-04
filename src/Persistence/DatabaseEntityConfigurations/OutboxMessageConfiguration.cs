@@ -14,6 +14,7 @@ internal sealed class OutboxMessageConfiguration : IEntityTypeConfiguration<Outb
             .HasFilter("processed_at_utc is null");
     }
 }
+
 internal sealed class OutboxMessageConsumerConfiguration : IEntityTypeConfiguration<OutboxMessageConsumer>
 {
     public void Configure(EntityTypeBuilder<OutboxMessageConsumer> builder)
